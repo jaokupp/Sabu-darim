@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>กรอกโค้ดรับของ</title>
+</head>
+<body>
+  <h2>🎁 กรอกโค้ดรับของ</h2>
+  <input id="codeInput">
+  <button onclick="sendCode()">รับของ</button>
+  <div id="result"></div>
+
+  <script>
+    async function sendCode() {
+      let code = document.getElementById("codeInput").value;
+      let res = await fetch("/redeem", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({code})
+      });
+      let data = await res.json();
+      document.getElementById("result").innerText = data.message;
+    }
+  </script>
+</body>
+</html>
