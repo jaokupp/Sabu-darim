@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin จัดการโค้ด</title>
+</head>
+<body>
+  <h2>🔐 Admin เพิ่มโค้ด</h2>
+  <input id="code"><input id="reward">
+  <button onclick="addCode()">เพิ่มโค้ด</button>
+  <div id="msg"></div>
+
+<script>
+  async function addCode(){
+    let code = document.getElementById("code").value;
+    let reward = document.getElementById("reward").value;
+    let res = await fetch("/admin/add", {
+      method: "POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({code, reward})
+    });
+    let data = await res.json();
+    document.getElementById("msg").innerText = data.message;
+  }
+</script>
+</body>
+</html>
